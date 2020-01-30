@@ -51,33 +51,82 @@ console.log("function is working!!");
     
     // step 1: display the date and time on html page (1 line of code)
 
-        //code on line 54:
+        //code on line 55:
         $("#currentDay").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
 
-        //code line 54 in english:get("idname").display text(January 29th 2020, 3:08:57 pm
+        //code line 55 in english:get("idname").display text(January 29th 2020, 3:08:57 pm
         
         //test if moment js is working
-        console.log("current day is working!!");
+        //console.log("current day is working!!");
 
-//////////////////// Step 2 ////////////////////////////////////////////////////////
-//create a function to display date and time
-///////////////////////////////////////////////////////////////////////////////////  
+    //////////////////// Step 2 //////////////////////////////////////////////////////
+    //create time block, text area, and save button 
+    //https://www.w3schools.com/jsref/jsref_gettime.asp
+    //One day (24 hours) is 86 400 000 milliseconds 
+    //24 hours is military time
+
+    //https://www.w3schools.com/js/js_loop_for.asp
+
+    //for - loops through a block of code a number of times
+
+    //Ex: for(statement 1, statement 2, statement 3)
+
+    //Statement 1 is executed (one time) before the execution of the code block.
+        //set variable before the loop starts (hour = 9)
+        //You can initiate many values in statement 1 (separated by comma)
+        //Used to initialize the variable used in the loop (hour = 9).
+
+    //Statement 2 defines the condition for executing the code block.
+        //define condition for the loop to run (hour less than 6)
+        //Often statement 2 is used to evaluate the condition of the initial variable.
+        //If statement 2 returns true, the loop will start over again, if it returns false, the loop will end.
+
+    //Statement 3 is executed (every time) after the code block has been executed.
+        //increases the value each time the code block in loop is run
+        //often used to increment and decrement 
+
+    //bootstrap grid for the columns
+    //https://getbootstrap.com/docs/4.4/layout/grid/#grid-options
+
+    ///////////////////////////////////////////////////////////////////////////////// 
+
+    // work on time block
+
+    //establish hours 9 AM - 5 PM
+    
+    //create a for loop 
+    //establish hours 9 AM - 5 PM
+    
+    for (var hour = 9; hour < 18; hour++){
+    //variable hour = 9; less than 6; hour increase each time)
     
     //create row
-
-    //append to container
-
-    //apend columns 1-3 to row
+    var row = $('<div class="row">');
 
     //create column 1 - time block
-
+    var time = $('<div class="col-2-sm"><p class="hour"></p>');
+    
     //create column 2 - text area
-
+    var description = $('<div class="col-8-sm"><textarea class="task"></textarea>');
+    
     //create column 3 - save button
+    var save = $('<div class="col-2-sm"><button class="saveButton"></button>');
 
+    //append columns 1-3 to row
+    
+    row.append(time)
+    
+    row.append(description)
+    
+    row.append(save)
 
+    //add row to container
+    $(".container").append(row)
+    
+    }
 
-    //repeat 
+    //function to update colors
 
+//event listener for save button to trigger function to save in local storage
 
 });
