@@ -160,6 +160,13 @@ $(".saveButton").on("click", storeSchedule);
 function storeSchedule() {
   console.log(storeSchedule);
   
+  //TEXT TIME VARIABLE IS PARSING INTEGER WITH THE ATTRIBUTE OF DATA-TEXTINPUT
+  let textTime = parseInt($(this).attr("data-textinput"));
+  console.log(textTime);
+
+  var textValue = $("#text-input-" + textTime).val();
+  console.log(textValue);
+  
 }
 
 /////////////////////////////////////////////////////////////////////
