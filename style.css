@@ -65,7 +65,7 @@ main {
 
 /***************** Time Block ******************************/
 
-.currentHourColumn{
+.timeColumn {
     border-bottom: 2px solid #004E6D;
     border-left: 2px solid #004E6D;
     border-top: 2px solid #004E6D;
@@ -78,7 +78,7 @@ main {
     width: auto;
 }
 
-.currentHour {
+.timeBlock {
     font-size: 20px;
     font-family: 'Ramabhadra', sans-serif;
     color: #fff;
@@ -92,7 +92,7 @@ main {
 
 /***************** Task Block ******************************/
 
-.workScheduleText {
+.workSchedulerText {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     color:#004E6D;
@@ -114,13 +114,17 @@ main {
 
 /***************** Save Button ******************************/
 
-.saveBtn {
+.saveButton{
+    font-family: 'Ramabhadra', sans-serif;
+    background-color: #DC2543;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    background-color: #DC2543;
+    margin: auto;
+    padding: auto;
+    min-height: 100px;
+    width: auto;
 }
-
-.saveBtn i:hover {
+.saveButton i:hover {
     font-size: 20px;
     transition: all .3s ease-in-out;
 }
@@ -129,8 +133,6 @@ main {
 align-content: center;
 color: #fff;
 align-self: center;
-max-height: 60px;
-min-width: 60px;
 }
 
 .present {

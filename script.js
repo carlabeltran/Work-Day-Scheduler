@@ -50,18 +50,18 @@ function displayWorkScheduler() {
     var row = $('<div class="row">');
     
     //CREATE COLUMN 1 FOR THE HOUR
-    var timeColumn = $("<div class='col-2 w-100 h-100 mx-0 my-0 px-0 py-0'>");
+    var timeColumn = $("<div class='timeColumn col-2 w-100 h-100 mx-0 my-0 px-0 py-0'>");
 
-    var timeBlock = $('<span class="timehour">' + formatAMPM(hour) + '</span>');
+    var timeBlock = $('<span class="timeBlock">' + formatAMPM(hour) + '</span>');
 
     timeColumn.append(timeBlock);
 
     //CREATE COLUMN 1 FOR THE TEXT
     var textColumn = $("<div class='col-9 w-100 h-100 mx-0 my-0 px-0 py-0'>");
 
-    var textInput = $("<input class='w-100 h-100' placeholder='Enter schedule here...'>");
+    var textInput = $("<input class='workSchedulerText' placeholder='Enter schedule here...'>");
 
-    var textId = "text-input-" + hourIndex;
+    var textId = "text-input-" + hour;
     console.log(hour);
 
     textInput.attr("id", textId);
@@ -90,9 +90,10 @@ function displayWorkScheduler() {
 
     //CREATE COLUMN 1 FOR THE SAVE BUTTON
 
-    var saveColumn = $("<div class='col-1 w-100 h-100 mx-0 my-0 px-0 py-0'>")
+    var saveColumn = $("<div class='saveColumn col-1 w-100 h-100 mx-0 my-0 px-0 py-0'>")
 
-    var saveButton = $("<button type='button' class='saveButton w-100 h-100 px-0 py-0'><i class='material-icons' id='icon'>save</i>");
+    var saveButton = $(
+      "<button type='button' class='saveButton col-1 w-100 h-100 mx-0 my-0 px-0 py-0' onclick=''><i class='material-icons' id='icon'>save</i>");
 
     saveButton.attr("data-textinput", hour);
     saveColumn.append(saveButton);
@@ -100,7 +101,7 @@ function displayWorkScheduler() {
 
     row.append(timeColumn);
     row.append(textColumn);
-    row.append(saveColumn);
+    row.append(saveButton);
 
     $(".workDaySchedulerList").append(row);
 
