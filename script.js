@@ -92,7 +92,7 @@ function displayWorkScheduler() {
 
     var saveColumn = $("<div class='col-1 w-100 h-100 mx-0 my-0 px-0 py-0'>")
 
-    var saveButton = $("<button type='button' class='saveButton w-100 h-100 px-0 py-0'>");
+    var saveButton = $("<button type='button' class='saveButton w-100 h-100 px-0 py-0'><i class='material-icons' id='icon'>save</i>");
 
     saveButton.attr("data-textinput", hour);
     saveColumn.append(saveButton);
