@@ -61,7 +61,7 @@ function displayWorkScheduler() {
 
     var textInput = $("<input class='w-100 h-100' placeholder='Enter schedule here...'>");
 
-    var textId = "text-input-" + hour;
+    var textId = "text-input-" + hourIndex;
     console.log(hour);
 
     textInput.attr("id", textId);
