@@ -29,9 +29,9 @@ $(document).ready(function () {
   //TESTING IF THE DATE AND TIME IS ON THE WORKDAY SCHEDULER HEADING
   console.log(currentTime);
 
+  displayWorkScheduler();
 });
 
-displayWorkScheduler();
 
 function displayWorkScheduler() {
   
@@ -92,8 +92,7 @@ function displayWorkScheduler() {
 
     var saveColumn = $("<div class='saveColumn col-1 w-100 h-100 mx-0 my-0 px-0 py-0'>")
 
-    var saveButton = $(
-      "<button type='button' class='saveButton col-1 w-100 h-100 mx-0 my-0 px-0 py-0' onclick=''><i class='material-icons' id='icon'>save</i>");
+    var saveButton = $("<button type='button' class='saveButton col-1 w-100 h-100 mx-0 my-0 px-0 py-0' onclick='storeUserWorkScheduler()'><i class='material-icons' id='icon'>save</i>");
 
     saveButton.attr("data-textinput", hour);
     saveColumn.append(saveButton);
@@ -112,26 +111,41 @@ function displayWorkScheduler() {
 ////////////////////////////////////////////////////////////////////
 //CREATE A FUNCTION TO FORMAT HOURS && CHANGES THE HOUR DISPLAY FROM MIILTARY TIME TO REGULAR TIME
 /////////////////////////////////////////////////////////////////////
-function formatAMPM(hours) {
+function formatAMPM(hour) {
 console.log("format AMPM is working!!");
 
-    var ampm = hours >= 12 ? "pm" : "am";
-    //variable ampm equals hours greater than or equal to 
-    //variable ampm is storing greater than or equal to 12 ternary operator
-    //>= : greater than or equal to
-    // ?: ternary operator
+  var ampm = hour >= 12 ? "PM" : "AM";
+  //variable ampm equals hours greater than or equal to 
+  //variable ampm is storing greater than or equal to 12 ternary operator
+  //>= : greater than or equal to
+  // ?: ternary operator
                             
-    hours = hours % 12;
-    //hour equal hours 
-    //% :   Modulus (Division Remainder)
+  hour = hour % 12;
+  //hour equal hours 
+  //% :   Modulus (Division Remainder)
     
-    hours = hours ? hours : 12;
-    //HOURS EQUALS HOURS 
+  hour = hour ? hour : 12;
+  //HOURS EQUALS HOURS 
     
-    return hours + ampm;
-}
-console.log(hours)
+  return hour + " " + ampm;
+};
 //INITIALIZE FORMATAMPM(HOURS)
 formatAMPM();
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////
+//SAVE WORK SCHEDULE TO LOCAL STORAGE
+/////////////////////////////////////////////////////////////////////
+saveButton.on("click", storeUserWorkScheduler);
+function storeUserWorkScheduler() { 
+  console.log(storeUserWorkScheduler);
+
+
+}
+
+
+
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
