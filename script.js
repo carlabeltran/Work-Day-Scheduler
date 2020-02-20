@@ -20,6 +20,8 @@ console.log(currentHour);
 
 var workDaySchedulerList = document.querySelectorAll(".workDaySchedulerList");
 
+var workSchedule = [];
+
 displaySchedule();
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -166,6 +168,12 @@ function storeSchedule() {
 
   var textValue = $("#text-input-" + textTime).val();
   console.log(textValue);
+
+  workSchedule[textTime - 9] = textValue;
+  console.log(workSchedule);
+
+  localStorage.setItem("workSchedule", JSON.stringify(workSchedule));
+  console.log("workSchedule", workSchedule);
   
 }
 
