@@ -50,14 +50,14 @@ function displayWorkScheduler() {
     var row = $('<div class="row">');
     
     //CREATE COLUMN 1 FOR THE HOUR
-    var timeColumn = $("<div class='timeColumn col-2 w-100 h-100 mx-0 my-0 px-0 py-0'>");
+    var timeColumn = $("<div class='timeColumn col-1 w-100 h-100 mx-0 my-0 px-0 py-0'>");
 
     var timeBlock = $('<span class="timeBlock">' + formatAMPM(hour) + '</span>');
 
     timeColumn.append(timeBlock);
 
     //CREATE COLUMN 1 FOR THE TEXT
-    var textColumn = $("<div class='col-9 w-100 h-100 mx-0 my-0 px-0 py-0'>");
+    var textColumn = $("<div class='col-10 w-100 h-100 mx-0 my-0 px-0 py-0'>");
 
     var textInput = $("<input class='workSchedulerText' placeholder='Enter schedule here...'>");
 
