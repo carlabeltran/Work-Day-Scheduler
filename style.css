@@ -4,11 +4,11 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Ramabhadra|Yesteryear&display=swap');
 /***************** HTML Body ******************************/
+
 body {
     line-height: 1;
     width: 100%;
     height: 100%;
-    background-color: #FEC0C1;
 }
 
 /***************** Header  *********************************/
@@ -41,7 +41,22 @@ width: 100%;
 height: 100%;
 }
 
-.row {
+.present {
+    background-color: #E4DACE;
+
+}
+
+.past {
+    background-color: #D92139;
+
+}
+
+.future {
+    background-color: #AEC33A;
+
+}
+
+.row .time-block {
     white-space: pre-wrap;
     min-height: 100px;
     width: 100%;
@@ -52,7 +67,7 @@ height: 100%;
 
 /***************** Time Block ******************************/
 
-.time-block {
+.time { 
     text-align: center;
     align-content: flex-start;
     align-self: flex-start;
@@ -95,7 +110,6 @@ padding:0;
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     color:#004E6D;
-    background-color: #FEC0C1;
 }
 
 /***************** Save Button ******************************/
@@ -117,18 +131,6 @@ padding:0;
 align-content: center;
 color: #fff;
 align-self: center;
-max-height: 60px;
-min-width: 60px;
-}
-
-.present {
-background-color: #E4DACE;
-}
-
-.past {
-background-color: #D92139;
-}
-
-.future {
-    background-color: #AEC33A;
+max-height: 100px;
+min-width: 100px;
 }

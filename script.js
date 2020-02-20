@@ -1,12 +1,45 @@
 //verify html and javascript file are properly linked
 console.log("Java && HTML are linked!!");
 
+
+//global variables
+var present = $(this).css("backgroundColor", "#E4DACE");
+
+var past = $(this).css("backgroundColor", "#D92139");
+
+var future = $(this).css("backgroundColor", "#AEC33A");
+
+var currentHour = moment().format("h");
+
+var saveBtn = $(".saveBtn");
+
+var row = $(".row");
+
+var textarea = $(".textArea");
+
+var currentDate = moment().format("MMMM Do YYYY, h:mm:ss a");
+
+var currentTime = moment().format("h:mm:ss a");
+
 function getStorage(key){
     var value = localStorage.getItem(key)
     if(value) {
         $("#text${key}").text(value);
-    }
+    };
+};
+
+function newDateTime() {
+    var date = new Date();
+        console.log("date");
+        let h = date.getHours();
+        let mm = date.getMinutes();
+        let ss = date.getSeconds();
+        console.log("hour: " + h + "Minute: " + mm + "Second: " + ss + "a");
 }
+$("#currentDay").html(newDateTime());
+//this updates the current date every mil sec
+var interval = setInterval(newDateTime, 1000);
+
 //////////////////// Step 1 /////////////////////////////////////////////////
 //create a function to display date and time
 //on HTML Page:<p id="currentDay"></p>
@@ -30,8 +63,8 @@ console.log("function is working!!");
     // step 1 for option 1: create a variable to store date and time in (2 lines of code)
     
         //code on line 29:
-        //var date = moment().format('MMMM Do YYYY, h:mm:ss a'); 
-    
+
+        
         //code line 29 in english: variable date = January 29th 2020, 3:08:57 pm
         //var = variable 
         //date = the name I chose for my variable that will use to store data in this case the date & time. 
@@ -40,7 +73,7 @@ console.log("function is working!!");
     // step 2 for option 1: display current date and time on html
     
         //code on line 39:
-        //$("#currentDay").html(date)
+    //$("#currentDay").html("date + h + mm + ss");
     
         //code line 39 in english: get("idname").in/on html document(display this = date)
         //$ = get
@@ -50,17 +83,19 @@ console.log("function is working!!");
         //.html = in html document or on html document
         //(date) = display the data stored in date variable
         //in this case it would be: moment().format('MMMM Do YYYY, h:mm:ss a'); = January 29th 2020, 3:08:57 pm
+            //this updates the current date
+
+    //this updates the current date every mil sec
 
     ///////////////////////// Option 2 display date ////////////////////////
     
     // step 1: display the date and time on html page (1 line of code)
-
         //code on line 55:
-        $("#currentDay").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
+        $("#currentDay").text(moment().format("MMMM Do YYYY, h:mm:ss a"));
         //code line 55 in english:get("idname").display text(January 29th 2020, 3:08:57 pm
         //test if moment js is working
         console.log("current day is working!!");
-
+    
     //////////////////// Step 2 ////////////////////////////////////////////
     //create time block, text area, and save button 
     //https://www.w3schools.com/jsref/jsref_gettime.asp
@@ -95,21 +130,20 @@ console.log("function is working!!");
     //https://api.jquery.com/jquery.each/
     /////////////////////////////////////////////////////////////////////// 
 
-    // work on time block
-    //establish hours 9 AM - 5 PM
-    //create a for loop 
-
+    //create a for loop in order to have the code create all the necessary rows for hours 9 AM - 5 PM
     for (var hour = 9; hour < 18; hour++) {
         //variable hour = 9am; less than 6pm; hour increase each time) 
 
         //create row
-        var row = $('<div class="row" id="${hour}" data-time=${hour}>');
+        var row = $('<div class="row time-block" data-time=${hour} id="${hour}">');
 
         //create column 1 - time block
-        var timeBlockColumn = $('<div class="col-2-sm time-block"> <p class="timehour">' + formatAMPM(hour) + '</p>');
+        var timeBlockColumn = $('<div class="col-2-sm timehour"> <p class="time" data-time=${hour} id="${hour}">' + formatAMPM(hour) + '</p>');
     
         //create column 2 - text area
-        var textAreaColumn = $('<div class="col-8-sm d-flex description"> <textarea id=text${hour} class="textArea" placeholder="Enter tasks here..."> </textarea>');
+        var textAreaColumn = $(
+        '<div class="col-8-sm d-flex description"> <textarea placeholder="Enter tasks here..." id="text${hour}" class="textArea present"> </textarea>'
+        );
         
         //create column 3 - save button
         var saveButtonsColumn = $('<div class="col-2-sm"> <button id="${hour}" type="btn" class="saveBtn" click="saveStorage"> <i class="material-icons" id="icon">save</i> </button>');
@@ -121,16 +155,17 @@ console.log("function is working!!");
         
         row.append(saveButtonsColumn);
 
-
         //appending row to container
         $(".container").append(row);
 
-
-    }
+        console.log({ hour });
+        //for each time block update color
+        
+    };
     getStorage(hour);
-    update(row, value);
 });
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //creata a function to format hours
 function formatAMPM(hours) {
 console.log("format AMPM is working!!");
@@ -146,48 +181,51 @@ console.log("format AMPM is working!!");
     //% : 	Modulus (Division Remainder)
     
     hours = hours ? hours : 12;
-    //hours equals hours 
+    //hours equals hours ternary hours : 12 
     
     return hours + ampm;
-}
+};
 formatAMPM();
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //function to update colors/validation value?or key?or hour?
-var currentTime = moment().format("h");
-$("time-block").each(function update() {
+//maybe make a function for the the button color and save storage all together
 
+//when someone intially opens the page the backgrounds need to be set maybe a window on load with function inside.
+function colorVal() {
+    
+    var currentHour = new Date().getHours();
+    
     for (var hour = 9; hour < 18; hour++) {
-    
-        if (hour === currentTime.hour()) {
-            //hour ===	equal value and equal type    
-            $(this).find("textarea").addClass("present");
-            $(".row").css("background-color", "#E4DACE");
-            
-        } else if (hour < currentTime.hour()) {
-            //if hour is less than currenthour  
-            
-            ($(this).find("textarea").addClass("past"))
-            ($(".row").css("background-color", "#D92139"))
-            
-        } else {
+    //if hour equal to current hour show appropriate background 
         
-            $(this).find("textarea").addClass("future");
-            $(".row").css("background-color", "#AEC33A");
-    
-        };
+        if ($("#{hour}").data("hour") == currentHour) {
+            
+            $("#text${hour}").addClass("present");
+        
+        } else if (currentHour < (hour).data$("#${hour}")) {
+            //if hour is greater than currenthour
+            $("#text${hour}").removeClass("present");
+            $('#text${hour}').addClass("future");
+        
+        } else {
+            $("#text${hour}").removeClass("future");
+            $('#text${hour}').addClass("past");
+        }
     };
-});
+};
+colorVal();
+$(".time-block").each(function () {
+    var currentHour = new Date().getHours();
+    
+    for (var hour = 9; hour < 18; hour++) {
+        //if hour equal to current hour show appropriate background 
+        
+        if ($("#{hour}").data("hour") == currentHour) {
+    
+            $(this).find(".texArea").addClassList("present");
 
-//save to local storage
-var saveBtn = $(".saveBtn")
-saveBtn.on("click", function(event) {
-    event.preventDefault();
-    //
-    var hourID = $(this).att("id");
-    //set value attribute
-    var taskText = $(this).parent().siblings().children(".textArea").val();
-    //save user task in textarea set in local storage
-    localStorage.setItem(taskID, taskText);
-
-    console.log(taskText)
+        }
+    }
 });
