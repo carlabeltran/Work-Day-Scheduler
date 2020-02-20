@@ -4,24 +4,29 @@ console.log("JAVA & HTML LINKED!!");
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
-//
+//VARIABLES & DOM ELEMENTS
 /////////////////////////////////////////////////////////////////////
 //DISPLAYS THE DAY
 var todaysDate = moment().format("MMMM Do, YYYY")
-console.log(todaysDate);
+console.log("todaysDate:", todaysDate);
 
 //DISPLAYS THE CURRENT TIME AM/PM
 var currentTime = moment().format("h:mm:ss a");
-console.log(currentTime);
+console.log("currentTime:", currentTime);
 
 //DISPLAYS THE CURRENT HOUR AM / PM
 var currentHour = moment().format("h A");
-console.log(currentHour);
+console.log("currentHour:", currentHour);
 
 var workDaySchedulerList = document.querySelectorAll(".workDaySchedulerList");
 
-var workSchedule = [];
+let storedSchedule = getSchedule(); 
+console.log("storedSchedule:", storedSchedule)
 
+var workSchedule = [];
+console.log("workSchedule:", workSchedule);
+
+//INITIALIZE DISPLAY SCHEDULE
 displaySchedule();
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -55,8 +60,9 @@ formatAMPM();
 /////////////////////////////////////////////////////////////////////
 
 
+
 /////////////////////////////////////////////////////////////////////
-//CREATES AND DISPLAYS WORK DAY SCHEDULER ALSO CHANGES THE BACKGROUND COLOR BASED ON THE TIME OF DAY
+//CREATES & DISPLAYS WORK DAY SCHEDULER ALSO CHANGES THE BACKGROUND COLOR BASED ON THE TIME OF DAY
 /////////////////////////////////////////////////////////////////////
 function displaySchedule() {
 
@@ -64,16 +70,16 @@ function displaySchedule() {
   $("#currentDay").text(todaysDate);
 
   //TESTING IF THE DATE AND TIME IS ON THE WORKDAY SCHEDULER HEADING
-  console.log(currentDay);
+  console.log("currentDay:", currentDay);
 
   $("#currentTime").text(currentTime);
   
   //TESTING IF THE DATE AND TIME IS ON THE WORKDAY SCHEDULER HEADING
-  console.log(currentTime);
+  console.log("currentTime:", currentTime);
   
   //THIS VARIBALE STORS THE HOUR ID
   var hourId = parseInt(moment().hour());
-  console.log("hourId", hourId);
+  console.log("hourId:", hourId);
 
   //HOUR FOR LOOP 
   for (var hour = 9; hour < 18; hour++) {
@@ -92,7 +98,7 @@ function displaySchedule() {
     var timeColumn = $("<div class='time col-1 w-100 h-100 mx-0 my-0 px-0 py-0'>");
 
     var timeBlock = $('<span class="hour">' + formatAMPM(hour) + '</span>');
-    console.log(hour);
+    console.log("hour:", hour);
 
     //APPENDING TIME BLOCK TO TIME COLUMN
     timeColumn.append(timeBlock);
@@ -103,10 +109,10 @@ function displaySchedule() {
     var textInput = $("<input class='workDaySchedulerText' placeholder='Enter work schedule here...'>");
 
     var textInputId = "text-input-" + hour;
-    console.log(textInputId);
+    console.log("textInputId:", textInputId);
 
     textInput.attr("id", textInputId);
-    console.log(textInput);
+    console.log("textInput:", textInput);
 
     //IF ELSE STATEMENT TO ESTABLISH THE BACKGROUND OF THE TEXT INPUT AREA
     if (currentHour == hourIndex) {
@@ -114,8 +120,12 @@ function displaySchedule() {
       //THIS WILL CHANGE THE INPUT BACKGROUND TO GREEN
       textInput.addClass("present");
       console.log("present");
+
     } else if (currentHour > hourIndex) {
-      
+
+      console.log("currentHour:", currentHour);
+      console.log("hourIndex:", hourIndex);
+
       //THIS WILL CHANGE THE INPUT BACKGROUND TO RED
       textInput.addClass("past");
       console.log("past");
@@ -146,73 +156,74 @@ function displaySchedule() {
 
     $(".workDayScheduler").append(row);
 
-
   };
 
 };
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 
-$(".saveButton").on("click", storeSchedule);
+
 
 ////////////////////////////////////////////////////////////////////
-//GET WORK SCHEDULE TO LOCAL STORAGE
+//SAVE BUTTON ON CLICK CALLING FUNCTION
 /////////////////////////////////////////////////////////////////////
-
-function storeSchedule() {
-  console.log(storeSchedule);
-  
-  //TEXT TIME VARIABLE IS PARSING INTEGER WITH THE ATTRIBUTE OF DATA-TEXTINPUT
-  let textTime = parseInt($(this).attr("data-textinput"));
-  console.log(textTime);
-
-  var textValue = $("#text-input-" + textTime).val();
-  console.log(textValue);
-
-  workSchedule[textTime - 9] = textValue;
-  console.log(workSchedule);
-
-  localStorage.setItem("workSchedule", JSON.stringify(workSchedule));
-  console.log("workSchedule", workSchedule);
-  
-}
-
+$(".saveButton").on("click", storeSchedule);
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
+
+
 
 ////////////////////////////////////////////////////////////////////
 //SAVE WORK SCHEDULE TO LOCAL STORAGE
 /////////////////////////////////////////////////////////////////////
+function storeSchedule() {
+  //console.log(storeSchedule);
+  
+  //TEXT TIME VARIABLE IS PARSING INTEGER WITH THE ATTRIBUTE OF DATA-TEXTINPUT
+  let textTime = parseInt($(this).attr("data-textinput"));
+  console.log("textTime:", textTime);
 
+  //TEXT VALUE VARIABLE IS ADDING TEXT INPUT ID AND TEXT TIME VALUE
+  var textValue = $("#text-input-" + textTime).val();
+  console.log("textValue:", textValue);
 
+  //
+  workSchedule[textTime - 9] = textValue;
+  console.log("workSchedule:", workSchedule);
 
-
-
+  //UPLOADS MY WORK SCHEDULE ARRAY TO LOCAL STORAGE
+  localStorage.setItem("workSchedule", JSON.stringify(workSchedule));
+  console.log("workSchedule:", workSchedule);
+  
+};
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 
 
+
+////////////////////////////////////////////////////////////////////
+//GET WORK SCHEDULE TO LOCAL STORAGE
 /////////////////////////////////////////////////////////////////////
-//
-/////////////////////////////////////////////////////////////////////
+function getSchedule() {
+  //console.log(getSchedule);
+  
+  let storedSchedule;
+  
+  storedSchedule = JSON.parse(localStorage.getItem("workSchedule"));
+  console.log("storedSchedule:", storedSchedule);
+  console.log("workSchedule:", workSchedule);
 
+  if (!storedSchedule) {
+    
+    console.log("storedSchedule:", storedSchedule);
+    
+    workSchedule = storedSchedule;
 
+    console.log("workSchedule:", workSchedule);
+  }
+  return workSchedule;
 
-
-
-
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-
-
-
-/////////////////////////////////////////////////////////////////////
-//
-/////////////////////////////////////////////////////////////////////
-
-
-
-
-
+}
+console.log("workSchedule:", workSchedule);
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
